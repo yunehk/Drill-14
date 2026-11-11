@@ -13,3 +13,10 @@ def create_flock(image, rng=None):
                  65 + i * 62, rng.uniform(140, 240),
                  rng.choice((-1, 1)), rng.uniform(0, FRAME_COUNT))
             for i in range(BIRD_COUNT)]
+
+
+def render(flock):
+    pico2d.clear_canvas()
+    for bird in flock:
+        bird.draw()
+    pico2d.update_canvas()
