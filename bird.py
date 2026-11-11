@@ -19,3 +19,11 @@ def frame_rect(frame, width, height):
 def load_bird_image():
     from pico2d import load_image
     return load_image(str(Path(__file__).with_name('bird_animation.png')))
+
+
+class Bird:
+    def __init__(self, image, x, y, speed=180.0, direction=1, frame=0.0):
+        self.image = image
+        self.x, self.y = x, y
+        self.speed, self.direction = speed, direction
+        self.frame = float(frame)
