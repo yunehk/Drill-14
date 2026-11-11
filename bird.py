@@ -14,3 +14,8 @@ def frame_rect(frame, width, height):
     left, right = column * width // 5, (column + 1) * width // 5
     top, bottom = row * height // 3, (row + 1) * height // 3
     return left, height - bottom, right - left, bottom - top
+
+
+def load_bird_image():
+    from pico2d import load_image
+    return load_image(str(Path(__file__).with_name('bird_animation.png')))
