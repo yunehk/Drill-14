@@ -30,3 +30,8 @@ class Bird:
 
     def animate(self, dt):
         self.frame = (self.frame + ANIMATION_FPS * dt) % FRAME_COUNT
+
+    def update(self, dt, canvas_width=CANVAS_WIDTH):
+        self.animate(dt)
+        self.x += self.direction * self.speed * dt
+        self.reflect_at_edges(canvas_width)
