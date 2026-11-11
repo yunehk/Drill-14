@@ -28,13 +28,13 @@ class BirdTests(unittest.TestCase):
             self.assertEqual(a.direction, b.direction)
 
     def test_reflections(self):
-        for x, direction, expected in ((1140, 1, -1), (60, -1, 1)):
+        for x, direction, expected in ((1540, 1, -1), (60, -1, 1)):
             bird = Bird(None, x, 100, speed=100, direction=direction)
             bird.update(0.2)
             self.assertAlmostEqual(bird.x, x)
             self.assertEqual(bird.direction, expected)
             bird.update(10000)
-            self.assertTrue(50 <= bird.x <= 1150)
+            self.assertTrue(50 <= bird.x <= 1550)
 
     def test_flock_and_facing(self):
         image = Mock(w=918, h=506)
@@ -42,6 +42,7 @@ class BirdTests(unittest.TestCase):
         self.assertEqual(len(flock), 10)
         self.assertEqual(len({b.y for b in flock}), 10)
         self.assertTrue(all(b.image is image for b in flock))
+        self.assertTrue(all(240 <= b.y <= 510 for b in flock))
         for direction, flip in ((1, ''), (-1, 'h')):
             flock[0].direction = direction
             flock[0].draw()

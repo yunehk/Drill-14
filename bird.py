@@ -5,7 +5,7 @@ FRAME_COUNT = 14
 ANIMATION_FPS = 14.0
 DRAW_WIDTH, DRAW_HEIGHT = 100, 92
 BIRD_COUNT = 10
-CANVAS_WIDTH, CANVAS_HEIGHT = 1200, 700
+CANVAS_WIDTH, CANVAS_HEIGHT = 1600, 600
 
 
 def frame_rect(frame, width, height):
@@ -31,7 +31,12 @@ class Bird:
     def animate(self, dt):
         self.frame = (self.frame + ANIMATION_FPS * dt) % FRAME_COUNT
 
-    def update(self, dt, canvas_width=CANVAS_WIDTH):
+    def update(self, dt=None, canvas_width=CANVAS_WIDTH):
+        if dt is None:
+            import game_framework
+            from pico2d import get_canvas_width
+            dt = game_framework.frame_time
+            canvas_width = get_canvas_width()
         self.animate(dt)
         self.x += self.direction * self.speed * dt
         self.reflect_at_edges(canvas_width)
