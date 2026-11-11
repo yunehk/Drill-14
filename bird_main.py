@@ -37,3 +37,16 @@ def main():
             pico2d.delay(0.001)
     finally:
         pico2d.close_canvas()
+
+
+def handle_events():
+    for event in pico2d.get_events():
+        if event.type == pico2d.SDL_QUIT:
+            return False
+        if event.type == pico2d.SDL_KEYDOWN and event.key == pico2d.SDLK_ESCAPE:
+            return False
+    return True
+
+
+if __name__ == '__main__':
+    main()
