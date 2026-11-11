@@ -52,3 +52,9 @@ class Bird:
             else:
                 self.x = right - (phase - span)
                 self.direction *= -1
+
+    def draw(self):
+        clip = frame_rect(self.frame, self.image.w, self.image.h)
+        self.image.clip_composite_draw(
+            *clip, 0, 'h' if self.direction < 0 else '',
+            self.x, self.y, DRAW_WIDTH, DRAW_HEIGHT)
