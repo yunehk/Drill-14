@@ -35,3 +35,20 @@ class Bird:
         self.animate(dt)
         self.x += self.direction * self.speed * dt
         self.reflect_at_edges(canvas_width)
+
+    def reflect_at_edges(self, canvas_width):
+        left, right = DRAW_WIDTH / 2, canvas_width - DRAW_WIDTH / 2
+        if right <= left:
+            raise ValueError('Canvas must be wider than a bird')
+        span = right - left
+        phase = (self.x - left) % (2 * span)
+        if self.x <= left or self.x >= right:
+            if phase == 0:
+                self.x, self.direction = left, 1
+            elif phase == span:
+                self.x, self.direction = right, -1
+            elif phase < span:
+                self.x = left + phase
+            else:
+                self.x = right - (phase - span)
+                self.direction *= -1
