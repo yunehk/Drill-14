@@ -20,3 +20,20 @@ def render(flock):
     for bird in flock:
         bird.draw()
     pico2d.update_canvas()
+
+
+def main():
+    pico2d.open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT, sync=True)
+    try:
+        flock = create_flock(load_bird_image())
+        previous = time.perf_counter()
+        while handle_events():
+            now = time.perf_counter()
+            dt = now - previous
+            previous = now
+            for bird in flock:
+                bird.update(dt)
+            render(flock)
+            pico2d.delay(0.001)
+    finally:
+        pico2d.close_canvas()
