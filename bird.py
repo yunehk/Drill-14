@@ -27,3 +27,6 @@ class Bird:
         self.x, self.y = x, y
         self.speed, self.direction = speed, direction
         self.frame = float(frame)
+
+    def animate(self, dt):
+        self.frame = (self.frame + ANIMATION_FPS * dt) % FRAME_COUNT
